@@ -1,0 +1,54 @@
+# Build outputs
+/bin/
+/obj/
+/out/
+/publish/
+artifacts/
+
+# Test results
+/TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# IDE files
+/.vs/
+/.vscode/
+/.idea/
+
+# Package management
+/packages/
+*.nupkg
+*.snupkg
+package-lock.json
+project.lock.json
+
+# Database files
+*.mdf
+*.ldf
+*.db
+
+# Logs
+/logs/
+*.log
+*.binlog
+
+# Environment
+.env
+.env.*
+
+# Python (for Python.NET, ML.NET, or mixed projects)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env/
+virtualenv/
