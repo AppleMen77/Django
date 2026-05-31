@@ -79,3 +79,4 @@ python manage.py makemigrations
 # После makemigrations снова запусти migrate:
 # python manage.py migrate
 # ═══════════════════════════════════════════════
+
