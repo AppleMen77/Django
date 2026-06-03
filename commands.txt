@@ -21,7 +21,12 @@ django-admin
 django-admin startproject BlogSite
 
 # 6. Перейти в папку проекта
-cd BlogSite
+cd web
+
+# ═══════════════════════════════════════════════
+# Вернуться обратно
+# cd ../  Enter
+# ═══════════════════════════════════════════════
 
 # 7. Запустить сервер
 python manage.py runserver
