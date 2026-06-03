@@ -6,7 +6,7 @@
 python -m venv .venv
 
 # 2. Активировать его
-source .venv/bin/activate
+.\.venv\Scripts\activate
 
 # 3. Установить Django
 pip install Django
