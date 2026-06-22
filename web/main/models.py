@@ -55,4 +55,23 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Профиль {self.name}"
-    
+
+class Notifications(models.Model):
+
+    notifications_type = (
+        ('comment', 'New comment'),
+        ('reply', 'Reply'),
+        ('like', 'Like'),
+    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    status = models.CharField("Тип уведомления", max_length=30, choices=notifications_type)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null = True, blank = True, related_name= 'notifications')
+    created_at = models.DateTimeField("Дата создания" , auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Уведомления"
+        verbose_name_plural = "Увведомления"
+
+    def __str__(self):
+        return f"Уведомления для {self.user.username}"

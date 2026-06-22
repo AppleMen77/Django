@@ -19,6 +19,7 @@ class CommentFilther(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == 'short':
             pass
+        # дописать!
 
 
 
@@ -87,9 +88,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "post_count")
     search_fields = ("name",)
 
-    def post_count(self, object):
+    def post_count(self, request, object):
         return object.posts.count
-    post_count.short.decription = "Количество постов"
+    post_count.short_decription = "Количество постов"
     post_count.admin_order_field = "post_count"
 
     def get_queryset(self, request):

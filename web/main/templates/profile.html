@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <h1>{{user.owner}}</h1>
+
+    <h3>Добро пожаловать!</h3>
+
+    <ul>
+        {% for post in user_posts %}
+        <li>
+            <h2>Заголовок</h2>
+            <p>Текстом</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>

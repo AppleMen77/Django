@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="profile">
+        {% if profile.avatar%}
+        <img src="{{ profile.avatar.url }}" width="150">
+        {% endif %}
+        <h1>{{profile.name}}</h1>
+        <p>{{ profile.bio }}</p>
+    </div>
+    <div>
+        <h2>Мои статьи</h2>
+        <ul>
+            {% for post in user_posts %}
+            <li>
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content|truncatechars:200 }}</p>
+                <small>Категория: {{ post.category.name }} | Просмотров: {{ post.views_count }}</small>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Постов нет</p>
+        {% endif %}
+    </div>
+    <div>
+        <h2>Уведомления</h2>
+        {% if notifications %}
+        <ul class="notifications">
+            {% for notification in notifications %}
+            <li class="{% if not notification.is_read %}unread{% endif %}">
+                <strong>{{ notification.get_notification_type_display }}</strong>:
+                {{ notification.message }}
+                <em>({{ notification.created_at|date:"d.m.Y H:i" }})</em>
+                {% if not notification.is_read %}
+                <span class="badge">Новое</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Уведомлений нет</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

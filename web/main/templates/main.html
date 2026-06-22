@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <h1>Главная</h1>
+        <div>
+            {% if not username %}
+                <a href="/register">Регистрация</a>
+                <a href="/login">Вход</a>
+            {% else %}
+                <p>{{username}}</p>
+                <a href="/logout">Выход</a>
+                <a href="/post">Новый пост</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <ul>
+        {% for user in all_users %}
+            <li>
+                <a href="/user/{{ user.owner }}" >{{ user.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <form action="/search_post">
+        <input type="text" name="search_text" placeholder="Найти что нибудь">
+        <button type="submit">Найти</button>
+    </form>
+
+    <ul id="posts_list">
+        {% for post in all_posts %}
+            <li>
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
