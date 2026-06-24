@@ -10,7 +10,7 @@ def home(request):
     notifications = Notifications.objects.all()
     post = Post.objects.all()
     return render(request, 'main.html', {'username': username,
-                                         'users': profiles,
+                                         'profiles': profiles,
                                          'posts': post,
                                          'notifications': notifications
                                          })
@@ -31,25 +31,31 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login/')
+    return redirect('/')
 
 def register_view(request):
     if request.method == 'POST':
         data = request.POST
         username = data.get('username')
-        password = data.get('password')
         email = data.get('email')
-        if not User.objects.filter(username=username):
-            user = User.objects.create_user(
-                username = username,
-                password = password,
-                email = email
-            )
-            Profile.objects.create(
-                owner = user,
-                name = username,
-                bio = f'Hello! I`m {username}'
-            )
+        password = data.get('password')
+        user = authenticate(request, username = username, password = password)
+        if not user:
+            user = User.objects.create_user(username, email, password)
+            Profile.objects.create(owner = user,
+                                    name = username)
             login(request, user)
             return redirect ('/')
     return render(request, 'register.html', {})
+
+def cp_view(request):
+    if request.method == 'POST':
+        data = request.POST
+        title = data.get('title')
+        content = data.get('content')
+        Post.objects.create(title = title, 
+                            content = content, 
+                            author = request.user
+                            )
+        return redirect('/')
+    return render(request, 'create_post.html', {})

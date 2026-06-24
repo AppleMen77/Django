@@ -23,9 +23,9 @@
     </div>
 
     <ul>
-        {% for user in all_users %}
+        {% for user in profiles %}
             <li>
-                <a href="/user/{{ user.owner }}" >{{ user.name }}</a>
+                <a href="/profile/{{ profile.owner }}" >{{ profiles.name }}</a>
             </li>
         {% endfor %}
     </ul>

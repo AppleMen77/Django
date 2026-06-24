@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создать пост</title>
+</head>
+<body>
+    <h1>Создать новый пост</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div>
+            <label for="title">Заголовок:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div>
+            <label for="content">Содержание:</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+        </div>
+        
+        <button type="submit">Опубликовать</button>
+    </form>
+    
+    <a href="/">На главную</a>
+</body>
+</html>

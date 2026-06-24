@@ -9,10 +9,10 @@
 </head>
 
 <body>
-    <h1>{{user.owner}}</h1>
+    <h1>{{ profile.name }}</h1>
 
     <h3>Добро пожаловать!</h3>
-
+    <h4>{{ profile.bio }}</h4>
     <ul>
         {% for post in user_posts %}
         <li>
