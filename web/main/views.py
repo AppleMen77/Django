@@ -59,3 +59,7 @@ def cp_view(request):
                             )
         return redirect('/')
     return render(request, 'create_post.html', {})
+
+def post_detail(request, post_id):
+    post = Post.objects.get(id = post_id)
+    return render(request, 'post.html', {})

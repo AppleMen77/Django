@@ -12,21 +12,21 @@
         <h1>Главная</h1>
         <div>
             {% if not username %}
-                <a href="/register">Регистрация</a>
-                <a href="/login">Вход</a>
+            <a href="/register">Регистрация</a>
+            <a href="/login">Вход</a>
             {% else %}
-                <p>{{username}}</p>
-                <a href="/logout">Выход</a>
-                <a href="/post">Новый пост</a>
+            <p>{{username}}</p>
+            <a href="/logout">Выход</a>
+            <a href="/post">Новый пост</a>
             {% endif %}
         </div>
     </div>
 
     <ul>
-        {% for user in profiles %}
-            <li>
-                <a href="/profile/{{ profile.owner }}" >{{ profiles.name }}</a>
-            </li>
+        {% for profile in profiles %}
+        <li>
+            <a href="/profile/{{ profile.owner }}">{{ profile.name }}</a>
+        </li>
         {% endfor %}
     </ul>
 
@@ -36,13 +36,17 @@
     </form>
 
     <ul id="posts_list">
-        {% for post in all_posts %}
-            <li>
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.content }}</p>
-            </li>
+        {% for post in posts %}
+        <li>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <a href="/post/{{ post.id }}">Подробнее</a>
+        </li>
+        {% empty %}
+        <li>Постов пока нет</li>
         {% endfor %}
     </ul>
 
 </body>
+
 </html>
