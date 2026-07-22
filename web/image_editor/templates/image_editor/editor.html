@@ -1,0 +1,63 @@
+{% extends "blog/base.html" %}
+{% block title %}Фоторедактор{% endblock %}
+{% block content %}
+<h2>Фоторедактор</h2>
+<div style="display: flex;">
+    <div style="flex: 1; padding: 10px;">
+        <h3>Загрузить изображение</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Загрузить</button>
+        </form>
+
+        {% if history %}
+        <h3>Последние изображения</h3>
+        <ul>
+            {% for img in history %}
+            <li>
+                <a href="?image_id={{ img.id }}">
+                    {% if img.original_image %}
+                        <img src="{{ img.original_image.url }}" width="50" height="50" alt="">
+                    {% else %}
+                        <span>Нет изображения</span>
+                    {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div style="flex: 2; padding: 10px;">
+        {% if image %}
+        <h3>Текущее изображение</h3>
+        <div>
+            {% if image.processed_image %}
+                <img src="{{ image.processed_image.url }}" width="300" alt="">
+            {% elif image.original_image %}
+                <img src="{{ image.original_image.url }}" width="300" alt="">
+            {% else %}
+                <p>Изображение не загружено</p>
+            {% endif %}
+            <p>Применённый фильтр: {{ image.filter_used|default:"нет" }}</p>
+        </div>
+
+        <h3>Выберите фильтр</h3>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="image_id" value="{{ image.id }}">
+            <button type="submit" name="filter" value="grayscale">Ч/б</button>
+            <button type="submit" name="filter" value="sepia">Сепия</button>
+            <button type="submit" name="filter" value="blur">Размытие</button>
+            <button type="submit" name="filter" value="contour">Контур</button>
+            <button type="submit" name="filter" value="square_crop">Квадрат</button>
+            <button type="submit" name="filter" value="rotate_90">Поворот 90°</button>
+            <button type="submit" name="filter" value="rotate_180">Поворот 180°</button>
+            <button type="submit" name="filter" value="rotate_270">Поворот 270°</button>
+        </form>
+        {% else %}
+        <p>Загрузите изображение или выберите из истории.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
