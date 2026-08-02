@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.vk',
     'django.contrib.staticfiles',
     'main',
+    'image_editor',
 ]
 
 MIDDLEWARE = [
